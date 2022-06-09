@@ -1,0 +1,1680 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="NHG" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>3140,22396</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>NHG_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="34">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="31">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Intially we are reading the Stock Grant Addition Excel and Global Worker Details Excel.&#xA;" DisplayName="NewHireGrant" sap:VirtualizedContainerService.HintSize="3150,22331.3333333333" sap2010:WorkflowViewState.IdRef="Sequence_92">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_RRGCR" />
+      <Variable x:TypeArguments="x:Int32" Name="SGARowCount" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_SGA" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_FilterSGA" />
+      <Variable x:TypeArguments="x:String" Name="RowGWD" />
+      <Variable x:TypeArguments="x:String" Name="RunDate" />
+      <Variable x:TypeArguments="x:String" Name="PathAvgTrading" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_PathAvgTrading" />
+      <Variable x:TypeArguments="x:Int32" Name="PathRow" />
+      <Variable x:TypeArguments="x:Int32" Name="PathCount" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_FinalPath" />
+      <Variable x:TypeArguments="x:String" Name="Path" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Path" />
+      <Variable x:TypeArguments="x:Int32" Name="PathRowCount" />
+      <Variable x:TypeArguments="x:String" Name="A1CellSGA" />
+      <Variable x:TypeArguments="x:Int32" Name="SGACount" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_CM" />
+      <Variable x:TypeArguments="x:Int32" Name="CMRowCountForDataGCR" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_CMOP" />
+      <Variable x:TypeArguments="x:Int32" Name="CMCountForDataGCR" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_SGA1" />
+      <Variable x:TypeArguments="x:String" Name="PrevMonLastSGA" />
+      <Variable x:TypeArguments="x:Boolean" Name="IsBreak" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_FilteredGCR" />
+      <Variable x:TypeArguments="x:String" Name="LegalFirstName" />
+      <Variable x:TypeArguments="x:String" Name="LegalLastName" />
+      <Variable x:TypeArguments="x:String" Name="LegalFullName" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_GWD1" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_PrevMonDatesSGA" />
+      <Variable x:TypeArguments="x:Int32" Name="IndexOutDt1" />
+      <Variable x:TypeArguments="x:String" Name="PrevMonFirstSGA" />
+      <Variable x:TypeArguments="x:Int32" Name="CMRowCountNoDataGCR" />
+      <Variable x:TypeArguments="x:Int32" Name="CMCountNoDataGCR" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_CMNoDataGCR" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_PrevMonthGCR" />
+      <Variable x:TypeArguments="x:String" Name="CurrentDate" />
+      <Variable x:TypeArguments="x:String" Name="CurrentMonthFY" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_FinalCurrentMonth" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Romania" />
+      <Variable x:TypeArguments="x:Int32" Name="RowCountOT" />
+      <Variable x:TypeArguments="x:Int32" Name="CountOT" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_NonRomania" />
+      <Variable x:TypeArguments="x:Int32" Name="RowCountRSU" />
+      <Variable x:TypeArguments="x:String" Name="PrevMonthYearFY" />
+      <Variable x:TypeArguments="x:String" Name="PrevMonthFY" />
+      <Variable x:TypeArguments="x:String" Name="CurrentMonYearFY" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ReadRange AddHeaders="False" sap2010:Annotation.AnnotationText="Read Range fro GlobalWorkerDetails Excel" DataTable="[Dt_GWD1]" DisplayName="Read Range for GlobalWorkerDetails Excel" sap:VirtualizedContainerService.HintSize="3108,86.6666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_4" Range="A5" SheetName="[in_Config(&quot;GWDExcel_Sheet&quot;).ToString]" WorkbookPath="[in_Config(&quot;GlobalWorkerDetails&quot;).ToString]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ReadRange>
+    <ui:ReadRange AddHeaders="False" sap2010:Annotation.AnnotationText="Read Range for StockGrantAddition Excel" DataTable="[Dt_SGA1]" DisplayName="Read Range for StockGrantAddition Excel" sap:VirtualizedContainerService.HintSize="3108,86.6666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_5" Range="A2" SheetName="[in_Config(&quot;SGA_Excel_Sheet&quot;).ToString]" WorkbookPath="[in_Config(&quot;StockGrantAdditionExcel&quot;).ToString]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ReadRange>
+    <ui:LogMessage DisplayName="Log Message 1" sap:VirtualizedContainerService.HintSize="3108,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Reading files from GlobalworkerDetails Excel and stockGrantAddition Excel&quot;]" />
+    <ui:ExcelApplicationScope Password="{x:Null}" sap2010:Annotation.AnnotationText="" DisplayName="ExcelApplicationScopeForNewHireGrantSheet" sap:VirtualizedContainerService.HintSize="3108,21851.3333333333" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_4" InstanceCachePeriod="3000" WorkbookPath="[in_Config(&quot;NewHireGrant&quot;).ToString]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence sap2010:Annotation.AnnotationText="1.Here we are pasting the values from stock grand addition excel to stock grant addition sheet and Glocbal worker details excel to Global worker details sheet.&#xA;2.Check the Rundate present in GWD Sheet and print the Rundate.&#xA;" DisplayName="DoForGWDSheet" sap:VirtualizedContainerService.HintSize="3074,21742.6666666667" sap2010:WorkflowViewState.IdRef="Sequence_91">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelDeleteRange DisplayName="Delete Range for Stock Grant - Additions" sap:VirtualizedContainerService.HintSize="3032,135.333333333333" sap2010:WorkflowViewState.IdRef="ExcelDeleteRange_22" Range="A3:XFD1048576" SheetName="Stock Grant - Additions" ShiftCells="False" ShiftOption="ShiftUp" />
+            <ui:ExcelDeleteRange DisplayName="Delete Range" sap:VirtualizedContainerService.HintSize="3032,135.333333333333" sap2010:WorkflowViewState.IdRef="ExcelDeleteRange_23" Range="A5:XFD1048576" SheetName="GWD" ShiftCells="False" ShiftOption="ShiftUp" />
+            <ui:ExcelWriteRange AddHeaders="False" sap2010:Annotation.AnnotationText="Write Range for GWD sheet" DataTable="[Dt_GWD1]" DisplayName="Write Range for GWD sheet" sap:VirtualizedContainerService.HintSize="3032,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_20" SheetName="[in_Config(&quot;GWD_Sheet&quot;).ToString]" StartingCell="A5">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ExcelWriteRange>
+            <ui:LogMessage DisplayName="Log Message 2" sap:VirtualizedContainerService.HintSize="3032,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;writing the data from Global Worker Details excel to GWD sheet(In NewHireGrantExcel)&quot;]" />
+            <ui:ExcelWriteRange AddHeaders="False" sap2010:Annotation.AnnotationText="Write Range for StockGrantAddition Sheet" DataTable="[Dt_SGA1]" DisplayName="Write Range for StockGrantAddition Sheet" sap:VirtualizedContainerService.HintSize="3032,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_21" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]" StartingCell="A3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ExcelWriteRange>
+            <ui:LogMessage DisplayName="Log Message 3" sap:VirtualizedContainerService.HintSize="3032,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;writing the data from stock grant addition excel to stock grant addition sheet(In NewHireGrantExcel)&quot;]" />
+            <Assign sap2010:Annotation.AnnotationText="Assign for RunDate in GWD Sheet" DisplayName="Assign for RunDate in GWDSheet" sap:VirtualizedContainerService.HintSize="3032,62" sap2010:WorkflowViewState.IdRef="Assign_58">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[RunDate]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">RUN DATE</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+            <ui:ExcelReadCell sap2010:Annotation.AnnotationText="Read Cell for A3 in GWD sheet" Cell="A3" DisplayName="Read Cell for A3 in GWD sheet" sap:VirtualizedContainerService.HintSize="3032,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadCell_3" SheetName="[in_Config(&quot;GWD_Sheet&quot;).ToString]">
+              <ui:ExcelReadCell.Result>
+                <OutArgument x:TypeArguments="x:String">[RowGWD]</OutArgument>
+              </ui:ExcelReadCell.Result>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:ExcelReadCell>
+            <If sap2010:Annotation.AnnotationText="if in Input GWD sheet in A3 cell there is Rundate means the work flow will go to then or else flow will go to else part and RunDate will inserted&#xA;" Condition="[String.Equals(RowGWD,RunDate,StringComparison.InvariantCultureIgnoreCase)]" DisplayName="IfForRunDateInGWDSheet" sap:VirtualizedContainerService.HintSize="3032,694" sap2010:WorkflowViewState.IdRef="If_10">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence DisplayName="SequenceForRunDateAlreadyPresentInSheet" sap:VirtualizedContainerService.HintSize="376,280.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_58">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <WriteLine DisplayName="Write Line for RundDate Present in GWDSheet" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="RunDate is Present already in sheet" />
+                  <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="Write Cell for RunDate (Bot RunDate) in GWD Sheet&#xA;" Cell="B3" DisplayName="Write Cell for RunDate (Bot RunDate)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_171" SheetName="[in_Config(&quot;GWD_Sheet&quot;).ToString]" Text="[Now.Date.ToString]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence DisplayName="SequenceForInsertingRunDateInSheet" sap:VirtualizedContainerService.HintSize="376,533.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_59">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ExcelInsertDeleteRows sap2010:Annotation.AnnotationText="Insert Row for RunDate in GWD Sheet" DisplayName="Insert Row for RunDate in GWD Sheet" sap:VirtualizedContainerService.HintSize="334,188" sap2010:WorkflowViewState.IdRef="ExcelInsertDeleteRows_3" Mode="Add" NoRows="1" Position="3" SheetName="[in_Config(&quot;GWD_Sheet&quot;).ToString]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelInsertDeleteRows>
+                  <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="Write Cell for RunDate in GWD Sheet" Cell="A3" DisplayName="Write Cell for RunDate in GWDSheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_172" SheetName="[in_Config(&quot;GWD_Sheet&quot;).ToString]" Text="RUN DATE">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                  <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="Write Cell for RunDate (Bot RunDate) in GWD Sheet" Cell="B3" DisplayName="Write Cell for RunDate (Bot RunDate) in GWDSheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_173" SheetName="[in_Config(&quot;GWD_Sheet&quot;).ToString]" Text="[Now.Date.ToString]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ExcelWriteCell>
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:LogMessage DisplayName="Log Message 4" sap:VirtualizedContainerService.HintSize="3032,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Entering the Rundate(Bot Running Date) in GWD sheet&quot;]" />
+            <Sequence sap2010:Annotation.AnnotationText="In this flow we are Reading the Path Average Trading Sheet and write the previous Month first date in B2 cell and previous month last date in B3 cell.&#xA;&#xA;&#xA;&#xA;&#xA;" DisplayName="DoForNewHireGrantAndGlobalConversionReport" sap:VirtualizedContainerService.HintSize="3032,19708" sap2010:WorkflowViewState.IdRef="Sequence_131">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap2010:Annotation.AnnotationText="Assign for first date of Previous Month" DisplayName="Assign for first date of Previous Month 1" sap:VirtualizedContainerService.HintSize="2990,62" sap2010:WorkflowViewState.IdRef="Assign_93">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[PrevMonFirstSGA]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[New DateTime(now.Year,now.Month,1).AddMonths(-1).ToString("MM-dd-yyyy")]</InArgument>
+                </Assign.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Assign>
+              <Assign sap2010:Annotation.AnnotationText="Assign for last date of Previous Month" DisplayName="Assign for last date of Previous Month 1" sap:VirtualizedContainerService.HintSize="2990,62" sap2010:WorkflowViewState.IdRef="Assign_94">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[PrevMonLastSGA]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[New DateTime(now.Year,now.Month,1).AddDays(-1).toString("dd-MM-yyyy")]</InArgument>
+                </Assign.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Assign>
+              <ui:ExcelReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read Range for PathAverageTrading Sheet" DataTable="[Dt_PathAvgTrading]" DisplayName="Read Range for PathAverageTrading Sheet" sap:VirtualizedContainerService.HintSize="2990,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_24" SheetName="[in_Config(&quot;PathAvgTrading_Sheet&quot;).ToString]">
+                <ui:ExcelReadRange.Range>
+                  <InArgument x:TypeArguments="x:String">
+                    <Literal x:TypeArguments="x:String" Value="" />
+                  </InArgument>
+                </ui:ExcelReadRange.Range>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ExcelReadRange>
+              <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="Write Cell for previousMonthFirstDate In PathAvgTrading Sheet" Cell="B2" DisplayName="Write Cell for previousMonthFirstDate In PathAvgTrading Sheet" sap:VirtualizedContainerService.HintSize="2990,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_260" SheetName="[in_Config(&quot;PathAvgTrading_Sheet&quot;).ToString]" Text="[PrevMonFirstSGA]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ExcelWriteCell>
+              <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="Write Cell for previousMonthLastDate In PathAvgTrading Sheet" Cell="B3" DisplayName="Write Cell for previousMonthLastDate In PathAvgTrading Sheet" sap:VirtualizedContainerService.HintSize="2990,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_261" SheetName="[in_Config(&quot;PathAvgTrading_Sheet&quot;).ToString]" Text="[PrevMonLastSGA]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ExcelWriteCell>
+              <ui:LogMessage DisplayName="Log Message 5" sap:VirtualizedContainerService.HintSize="2990,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;In Path Average Trading Sheet we Entering previous month first date (CurrentMonth 1st Date) and Previous Month Last date(CurrentMonth Last Date) in B2 Cell and B3 cell Respectively&quot;]" />
+              <Assign sap2010:Annotation.AnnotationText="Assign for pathAvgTrading for Last Row Value in Path Average Trading Sheet" DisplayName="Assign for pathAvgTrading" sap:VirtualizedContainerService.HintSize="2990,62" sap2010:WorkflowViewState.IdRef="Assign_95">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[PathAvgTrading]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[Dt_PathAvgTrading.Rows(Dt_PathAvgTrading.Rows.Count-1)(3).ToString]</InArgument>
+                </Assign.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Assign>
+              <ui:LogMessage DisplayName="Log Message 6" sap:VirtualizedContainerService.HintSize="2990,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;Path Average Trading Last Row value &quot;]" />
+              <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" sap2010:Annotation.AnnotationText="OpenBrowserForFinance.Yahoo to download a PATH CSV  file (for previous month data)" BrowserType="Chrome" DisplayName="OpenBrowserForFinance.Yahoo" sap:VirtualizedContainerService.HintSize="2990,3409.33333333333" sap2010:WorkflowViewState.IdRef="OpenBrowser_3" Url="[in_Config(&quot;YahooFinance&quot;).ToString]">
+                <ui:OpenBrowser.Body>
+                  <ActivityAction x:TypeArguments="x:Object">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="DoForYahooFinance  " sap:VirtualizedContainerService.HintSize="376,3306.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_99">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap2010:Annotation.AnnotationText="Assign For Previous Month for YahooFinance" DisplayName="Assign For Previous Month" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_98">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[PrevMonthFY]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[DateTime.Now.AddMonths(-1).ToString]</InArgument>
+                        </Assign.Value>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Assign>
+                      <Assign sap2010:Annotation.AnnotationText="Assign For Previous Month Year for yahooFinance" DisplayName="Assign For Previous Month Year" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_99">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[PrevMonthYearFY]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[Now.AddMonths(-1).ToString("yyyy")]</InArgument>
+                        </Assign.Value>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Assign>
+                      <Assign sap2010:Annotation.AnnotationText="Assign For Current Month for Current Month in YahooFinance" DisplayName="Assign For Current Month" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_96">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[CurrentMonthFY]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[System.DateTime.Now.Month.ToString]</InArgument>
+                        </Assign.Value>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Assign>
+                      <Assign sap2010:Annotation.AnnotationText="Assign For Current Month Year for YahooFinance" DisplayName="Assign For Current Month Year" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_97">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[CurrentMonYearFY]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[System.DateTime.Now.Year.ToString]</InArgument>
+                        </Assign.Value>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Assign>
+                      <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Window" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="MaximizeWindow_3" />
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="Enter the Path in search box  and search " ClickBeforeTyping="True" DisplayName="Type Into for search bar" EmptyField="True" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_15" SimulateType="False" Text="Path">
+                        <ui:TypeInto.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="cfa6a03f-40b2-424b-9a7f-0be643531834" InformativeScreenshot="d41985ff9eeec73efab5bcca03d441b8" Selector="&lt;webctrl tag='INPUT' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:TypeInto>
+                      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" sap2010:Annotation.AnnotationText="To click Enter we are using Hotkey" DisplayName="Send Hotkey for clicking enter" sap:VirtualizedContainerService.HintSize="334,155.333333333333" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="enter" KeyModifiers="None" SpecialKey="True">
+                        <ui:SendHotkey.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f722c652-081f-4df1-a064-7869b9330841" InformativeScreenshot="d41985ff9eeec73efab5bcca03d441b8" Selector="&lt;webctrl tag='INPUT' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:SendHotkey.Target>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:SendHotkey>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click on historical data" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_11" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="99f6206d-2707-4536-a67e-61cd36f31a7a" InformativeScreenshot="890e60a38145f11784bc5b4d225643f2" Selector="&lt;webctrl aaname='Historical Data' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click for drop down button for duration period" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a0fd4a10-4bb0-42da-ab1c-f03c55062da7" InformativeScreenshot="21107587a5b73a3e199c0e65670685a1" Selector="&lt;webctrl parentid='Col1-1-HistoricalDataTable-Proxy' tag='svg' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type into First date of previous month" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_16" Text="01">
+                        <ui:TypeInto.Target>
+                          <ui:Target Element="{x:Null}" Id="3b466de1-e6cc-4e34-9ca7-4de27409b71c" InformativeScreenshot="1a05f9dff1d680bc4f7858f5cc9e1914" Selector="&lt;webctrl tag='INPUT' type='date' /&gt;">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="6, 8, 15, 19" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type into for Previous month" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_17" Text="[PrevMonthFY]">
+                        <ui:TypeInto.Target>
+                          <ui:Target Element="{x:Null}" Id="6e6940cc-ffdc-4ff3-8cf2-9493a62302ee" InformativeScreenshot="6764e7e15e65d5b7e1b3550e8d16a6ef" Selector="&lt;webctrl tag='INPUT' type='date' /&gt;">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="28, 9, 15, 16" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" DelayBefore="10000" DisplayName="Type into for Previous month's Year" EmptyField="False" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_18" Text="[PrevMonthYearFY]">
+                        <ui:TypeInto.Target>
+                          <ui:Target Element="{x:Null}" Id="bb9b53bb-6c67-4dad-a6da-1bb83b1c58a9" InformativeScreenshot="bb486437f9cb8fc0e1052bcbfab35889" Selector="&lt;webctrl tag='INPUT' type='date' /&gt;">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="48, 12, 29, 12" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type into for First date of Current month" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_19" Text="01">
+                        <ui:TypeInto.Target>
+                          <ui:Target Element="{x:Null}" Id="3b466de1-e6cc-4e34-9ca7-4de27409b71c" InformativeScreenshot="e73b2d8b9c26c3936ed1c237d50daee8" Selector="&lt;webctrl name='endDate' tag='INPUT' type='date' /&gt;">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="2, 9, 18, 18" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type into for Current month" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_20" Text="[CurrentMonthFY]">
+                        <ui:TypeInto.Target>
+                          <ui:Target Element="{x:Null}" Id="a6576b6f-7e61-472c-95e2-1fe2019f87f7" InformativeScreenshot="4fbfdb6afcb5ca27ec44155722dc755b" Selector="&lt;webctrl name='endDate' tag='INPUT' type='date' /&gt;">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="26, 11, 16, 15" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type into for Current year" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_21" Text="[CurrentMonYearFY]">
+                        <ui:TypeInto.Target>
+                          <ui:Target Element="{x:Null}" Id="20ea85af-4c9e-4e22-aadf-6c0e96c93bb7" InformativeScreenshot="a74d19d57a73834cf3b665615b6a7c96" Selector="&lt;webctrl name='endDate' type='date' /&gt;">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="48, 10, 32, 14" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click for Done button" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="af575786-c191-4d81-80b6-ae8076b95817" InformativeScreenshot="ad8a998b4fb00821949f225396fd26ad" Selector="&lt;webctrl aaname='Done' parentid='dropdown-menu' innertext='Done' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click for Apply button" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_14" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4c4bdd9c-caf2-493d-a418-ed00e9eab92e" InformativeScreenshot="411f2d2afcebb61cbd532e16f7c3e32a" Selector="&lt;webctrl aaname='Apply' innertext='Apply' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_DOUBLE" ContinueOnError="True" DisplayName="Click for Download file" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_15" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target Element="{x:Null}" Id="8bf02bfe-4942-40a8-9820-5be4d9835bd2" InformativeScreenshot="0652d761a93ed904db54b61e4e6bae34" Selector="&lt;webctrl aaname='Download' innertext='Download' isleaf='1' /&gt;" WaitForReady="INTERACTIVE">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="792, 184, 96, 22" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into for enter required destination to download a file" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_22" Text="[in_Config(&quot;PathExcel&quot;).ToString]">
+                        <ui:TypeInto.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5d3a4c46-c2e9-4979-850e-f6e6f4d7d532" InformativeScreenshot="472326a6d8ffa55c4c2bde07f4b56b99" Selector="&lt;wnd app='chrome.exe' title='Save As' /&gt;&lt;wnd aaname='File name:*' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:TypeInto.Target>
+                      </ui:TypeInto>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click button for save" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="f1a42d72-c168-4562-9465-3e24904f2097" InformativeScreenshot="90bd726f9bd1e61fe4ceee14a52b21c8" Selector="&lt;wnd app='chrome.exe' cls='#32770' title='Save As' /&gt;&lt;wnd title='&amp;amp;Save' aaname='Save' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click button for yes" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="649154fb-dd3b-4633-b7c5-0d1ff15495d4" InformativeScreenshot="f4d12a532c8ab36dfd06c5d84c92c401" Selector="&lt;wnd app='chrome.exe' cls='#32770' title='Confirm Save As' /&gt;&lt;wnd aaname='Confirm Save As' cls='DirectUIHWND' /&gt;&lt;wnd aaname='Yes' cls='Button' title='&amp;amp;Yes' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                      <ui:KillProcess AppliesTo="{x:Null}" ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process for Chrome.exe" sap:VirtualizedContainerService.HintSize="334,135.333333333333" sap2010:WorkflowViewState.IdRef="KillProcess_6" ProcessName="Chrome" />
+                    </Sequence>
+                  </ActivityAction>
+                </ui:OpenBrowser.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:OpenBrowser>
+              <ui:LogMessage DisplayName="Log Message 7" sap:VirtualizedContainerService.HintSize="2990,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;From YahooFinance.com we are Downloading the PATH Csv File&quot;]" />
+              <Sequence sap2010:Annotation.AnnotationText="In this flow we are comparing Final values of  both Path CSV file from Finance.yahoo website and Path Average Trading sheet from NewHireGrant Excel . If both values same it will go to next flow other wise it will send notification to process owner.Here we are reading stock grant addition sheet and filter the previous month data (Employee ID and Employee Name) and paste in the Current month sheet respectively." DisplayName="ComparingYahooFinanceAndPathSheetValues" sap:VirtualizedContainerService.HintSize="2990,15104.6666666667" sap2010:WorkflowViewState.IdRef="Sequence_130">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="ExcelApplicationScopeForPathCsvFile" sap:VirtualizedContainerService.HintSize="2948,1098" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_5" InstanceCachePeriod="3000" WorkbookPath="[in_Config(&quot;PathExcel&quot;).ToString]">
+                  <ui:ExcelApplicationScope.Body>
+                    <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="SequenceForPathCsvFile" sap:VirtualizedContainerService.HintSize="376,989.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_101">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:ExcelReadRange AddHeaders="True" DataTable="[DT_Path]" DisplayName="Read Range for Path csv file" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_25" SheetName="[in_Config(&quot;PathSheet&quot;).ToString]">
+                          <ui:ExcelReadRange.Range>
+                            <InArgument x:TypeArguments="x:String">
+                              <Literal x:TypeArguments="x:String" Value="" />
+                            </InArgument>
+                          </ui:ExcelReadRange.Range>
+                        </ui:ExcelReadRange>
+                        <Assign sap2010:Annotation.AnnotationText="it can be used to count the rows in the excel sheet" DisplayName="Rowcount without headers" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_100">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[PathRowCount]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[DT_Path.Rows.Count]</InArgument>
+                          </Assign.Value>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Assign>
+                        <Assign DisplayName="Row count with headers" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_101">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[PathCount]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[PathRowCount+1]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Rowcount where we have to print" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_102">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[PathRow]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[PathRowCount+2]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:ExcelWriteCell Cell="[&quot;E&quot;+PathRow.ToString]" DisplayName="Write Cell for calculating average value" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_262" SheetName="[in_Config(&quot;PathSheet&quot;).ToString]" Text="[&quot;=ROUNDDOWN(AVERAGE(E2:E&quot;+PathCount.ToString+&quot;),2)&quot;]" />
+                        <ui:ExcelReadRange AddHeaders="True" DataTable="[dt_FinalPath]" DisplayName="Read Range for Path CSV sheet (After calculating average value)" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_26" SheetName="[in_Config(&quot;PathSheet&quot;).ToString]">
+                          <ui:ExcelReadRange.Range>
+                            <InArgument x:TypeArguments="x:String">
+                              <Literal x:TypeArguments="x:String" Value="" />
+                            </InArgument>
+                          </ui:ExcelReadRange.Range>
+                        </ui:ExcelReadRange>
+                        <Assign DisplayName="Assign for Final row in sheet" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_103">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[Path]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[dt_FinalPath.Rows(dt_FinalPath.Rows.Count-1)(4).ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <WriteLine DisplayName="Write Line for path average trading value" sap:VirtualizedContainerService.HintSize="334,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_7" Text="[PathAvgTrading]" />
+                        <WriteLine DisplayName="Write Line for path csv file value" sap:VirtualizedContainerService.HintSize="334,62.6666666666667" sap2010:WorkflowViewState.IdRef="WriteLine_8" Text="[Path]" />
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:ExcelApplicationScope.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:ExcelApplicationScope>
+                <ui:LogMessage DisplayName="Log Message 8" sap:VirtualizedContainerService.HintSize="2948,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;Here we are finding last value of sheet (Average value)&quot;]" />
+                <If Condition="[DataTable.Equals(PathAvgTrading,Path)]" DisplayName="IfForComparingPathAvgSheetAndYahooFinancialPathSheet" sap:VirtualizedContainerService.HintSize="2948,13740" sap2010:WorkflowViewState.IdRef="If_26">
+                  <If.Then>
+                    <Sequence DisplayName="SequenceForFilterPreviousDateFromStockGrantAdditionSheetAndPasteInCurrentMonthSheet" sap:VirtualizedContainerService.HintSize="2526,13579.3333333333" sap2010:WorkflowViewState.IdRef="Sequence_128">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Sequence DisplayName="DoForStockGrantAdditionAndCurrentMonthSheet" sap:VirtualizedContainerService.HintSize="2484,13487.3333333333" sap2010:WorkflowViewState.IdRef="Sequence_127">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message 9" sap:VirtualizedContainerService.HintSize="2442,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Path Trading Average Sheet Value and Finance.Yahoo  Downloaded Path Sheet Are Equal&quot;]" />
+                        <ui:ExcelDeleteRange sap2010:Annotation.AnnotationText="Delete Range for current month sheet to delete previous values in sheet" DisplayName="Delete Range for current month sheet" sap:VirtualizedContainerService.HintSize="2442,135.333333333333" sap2010:WorkflowViewState.IdRef="ExcelDeleteRange_19" Range="A3:XFD1048576" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" ShiftCells="False" ShiftOption="ShiftUp">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:ExcelDeleteRange>
+                        <Assign sap2010:Annotation.AnnotationText="Assign for RunDate for SGA sheet" DisplayName="Assign for RunDate in SGA Sheet" sap:VirtualizedContainerService.HintSize="2442,62" sap2010:WorkflowViewState.IdRef="Assign_104">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[RunDate]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">RUN DATE</InArgument>
+                          </Assign.Value>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Assign>
+                        <ui:ExcelReadCell sap2010:Annotation.AnnotationText="Read Cell for A1 in SGA sheet to check Rundate is there in SGA Sheet" Cell="A1" DisplayName="Read Cell for A1 in SGA sheet" sap:VirtualizedContainerService.HintSize="2442,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadCell_5" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]">
+                          <ui:ExcelReadCell.Result>
+                            <OutArgument x:TypeArguments="x:String">[A1CellSGA]</OutArgument>
+                          </ui:ExcelReadCell.Result>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:ExcelReadCell>
+                        <If sap2010:Annotation.AnnotationText="Check the Rundate in Stock grant addition sheet if it is not there we should insert the row and enter the &quot;Rundate&quot; in A1 cell and current date in B1 cell" Condition="[String.Equals(A1CellSGA,RunDate,StringComparison.InvariantCultureIgnoreCase)]" DisplayName="IfForSGASheetRunDate" sap:VirtualizedContainerService.HintSize="2442,696" sap2010:WorkflowViewState.IdRef="If_19">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence DisplayName="SequenceForRunDatePresentInSheet" sap:VirtualizedContainerService.HintSize="376,280.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_132">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign sap2010:Annotation.AnnotationText="For Current date enter in stock addition grant sheet" DisplayName="Assign for CurrentDate in SGA Sheet" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_123">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[CurrentDate]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[now.Date.ToString("MM-dd-yyyy")]</InArgument>
+                                </Assign.Value>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </Assign>
+                              <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="Write Cell for Current date in SGA sheet in B1 cell" Cell="B1" DisplayName="Write Cell for Current date in SGA sheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_329" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]" Text="[CurrentDate]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:ExcelWriteCell>
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence DisplayName="SequenceForRunDateNotPresentInSGASheet" sap:VirtualizedContainerService.HintSize="376,535.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_104">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:ExcelInsertDeleteRows sap2010:Annotation.AnnotationText="insert the row in first row in stock grant addition sheet" DisplayName="Insert/Delete Rows for RunDate in SGA Sheet" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="ExcelInsertDeleteRows_5" Mode="Add" NoRows="1" Position="1" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:ExcelInsertDeleteRows>
+                              <ui:ExcelWriteCell sap2010:Annotation.AnnotationText=" enter the &quot;Run Date&quot; in A1 place in Stock grant addition sheet" Cell="A1" DisplayName="Write Cell for Run Date in SGASheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_264" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]" Text="Run Date">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:ExcelWriteCell>
+                              <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="write Current date in B1 cell in stock grant sheet" Cell="B1" DisplayName="Write Cell for Current Date in SGA sheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_265" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]" Text="[CurrentDate]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:ExcelWriteCell>
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                        <ui:LogMessage DisplayName="Log Message 10" sap:VirtualizedContainerService.HintSize="2442,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;Entering the Rundate (Bot Run Date) in Stock grant addition sheet&quot;]" />
+                        <ui:ExcelReadRange AddHeaders="True" DataTable="[Dt_SGA]" DisplayName="Read Range for SGA sheet" sap:VirtualizedContainerService.HintSize="2442,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_27" Range="A2" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]" />
+                        <Assign DisplayName="Assign Previous Month FirstDate" sap:VirtualizedContainerService.HintSize="2442,62" sap2010:WorkflowViewState.IdRef="Assign_106">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[PrevMonFirstSGA]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[New DateTime(now.Year,now.Month,1).AddMonths(-1).ToString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Assign Previous month last date" sap:VirtualizedContainerService.HintSize="2442,62" sap2010:WorkflowViewState.IdRef="Assign_107">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[PrevMonLastSGA]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[New DateTime(now.Year,now.Month,1).AddDays(-1).toString]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Assign Previous Month Dates" sap:VirtualizedContainerService.HintSize="2442,65.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_108">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="sd:DataTable">[dt_PrevMonDatesSGA]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[Dt_SGA.AsEnumerable().Where(Function(r) (Datetime.ParseExact(r("Effective Date").ToString,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture)&gt;=DateTime.ParseExact(PrevMonFirstSGA,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture)) And
+(DateTime.ParseExact(r("Effective Date").ToString,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture)&lt;=DateTime.ParseExact(PrevMonLastSGA,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture))).CopyToDataTable()]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:FilterDataTable sap2010:Annotation.AnnotationText="By using filter data table we are filtering previous month data and extracting required output columns " DataTable="[dt_PrevMonDatesSGA]" DisplayName="Filter Data Table to filter previous month " FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="2442,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_24" OutputDataTable="[dt_FilterSGA]" SelectColumnsMode="Keep">
+                          <ui:FilterDataTable.Filters>
+                            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                              <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="EQ" />
+                            </scg:List>
+                          </ui:FilterDataTable.Filters>
+                          <ui:FilterDataTable.SelectColumns>
+                            <scg:List x:TypeArguments="InArgument" Capacity="4">
+                              <InArgument x:TypeArguments="x:String">["Employee ID"]</InArgument>
+                              <InArgument x:TypeArguments="x:String">["Employee"]</InArgument>
+                            </scg:List>
+                          </ui:FilterDataTable.SelectColumns>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:FilterDataTable>
+                        <If Condition="[isNothing(dt_FilterSGA)]" DisplayName="IfForSGADoesNotContainsPreviousMonthData" sap:VirtualizedContainerService.HintSize="2442,474" sap2010:WorkflowViewState.IdRef="If_27">
+                          <If.Then>
+                            <Sequence DisplayName="NoPreviousMonthDataInSGA" sap:VirtualizedContainerService.HintSize="376,177.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_133">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="SendNotificationWhenNotHavingPreviousMonthData" sap:VirtualizedContainerService.HintSize="334,85.3333333333333" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;There is no data in stock grant additon so, notification should sent to process owner&quot;]" />
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence DisplayName="WhenPreviousMonthDataPresntInSGA" sap:VirtualizedContainerService.HintSize="376,313.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_134">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:LogMessage DisplayName="Log Message 11" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[&quot;Filtered previous month dates from Effective Date column in stock grant addition sheet and paste the employee id and employee names respectively in current month sheet&quot;]" />
+                              <ui:ExcelWriteRange AddHeaders="False" DataTable="[dt_FilterSGA]" DisplayName="Write Range for Current Month sheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_28" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" StartingCell="A3" />
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                        <Assign DisplayName="Assign for SGA RowCount" sap:VirtualizedContainerService.HintSize="2442,62" sap2010:WorkflowViewState.IdRef="Assign_109">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[SGARowCount]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[Dt_SGA.Rows.Count]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Assign for SGA Count with headers" sap:VirtualizedContainerService.HintSize="2442,62" sap2010:WorkflowViewState.IdRef="Assign_110">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[SGACount]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[Dt_SGA.rowcount+2]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:ExcelWriteCell Cell="[&quot;Y3:Y&quot;+SGACount.ToString]" DisplayName="Write Cell for Total in SGA" sap:VirtualizedContainerService.HintSize="2442,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_268" SheetName="[in_Config(&quot;SGA_Sheet&quot;).ToString]" Text="=SUM(M3,Q3)" />
+                        <ui:ExcelReadRange AddHeaders="True" DataTable="[Dt_CM]" DisplayName="Read Range for CurrentMonth Sheet (Initially)" sap:VirtualizedContainerService.HintSize="2442,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_28" Range="A2" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" />
+                        <Sequence sap2010:Annotation.AnnotationText=" Read Global conversion report Excel and apply the filter for previous month data." DisplayName="globalconversionsheet" sap:VirtualizedContainerService.HintSize="2442,687.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_107">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:ReadRange AddHeaders="True" DataTable="[dt_RRGCR]" DisplayName="Read Range for GCR Sheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ReadRange_7" SheetName="[in_Config(&quot;GlobalconversionReportSheet&quot;).ToString]" WorkbookPath="[in_Config(&quot;GlobalconversionReportExcel&quot;).ToString]">
+                            <ui:ReadRange.Range>
+                              <InArgument x:TypeArguments="x:String">
+                                <Literal x:TypeArguments="x:String" Value="" />
+                              </InArgument>
+                            </ui:ReadRange.Range>
+                          </ui:ReadRange>
+                          <Assign DisplayName="Previous Month Dates" sap:VirtualizedContainerService.HintSize="334,65.3333333333333" sap2010:WorkflowViewState.IdRef="Assign_111">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="sd:DataTable">[dt_PrevMonthGCR]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="sd:DataTable" xml:space="preserve">[dt_RRGCR.AsEnumerable().Where(Function(r) (Datetime.ParseExact(r("Effective Date of Sub- Type Change").ToString,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture)&gt;=DateTime.ParseExact(PrevMonFirstSGA,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture)) And
+(DateTime.ParseExact(r("Effective Date of Sub- Type Change").ToString,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture)&lt;=DateTime.ParseExact(PrevMonLastSGA,"MM/dd/yyyy HH:mm:ss",CultureInfo.InvariantCulture))).CopyToDataTable()]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:FilterDataTable sap2010:Annotation.AnnotationText="From filter data table we are filtering the data that &quot;Current Worker Sub Type&quot; is Equals to Regular" DataTable="[dt_PrevMonthGCR]" DisplayName="Filter Data Table for GCR sheet" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_25" OutputDataTable="[Dt_FilteredGCR]" SelectColumnsMode="Keep">
+                            <ui:FilterDataTable.Filters>
+                              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                  <ui:FilterOperationArgument.Column>
+                                    <InArgument x:TypeArguments="x:String">["Current Worker Sub Type"]</InArgument>
+                                  </ui:FilterOperationArgument.Column>
+                                  <ui:FilterOperationArgument.Operand>
+                                    <InArgument x:TypeArguments="x:String">["Regular"]</InArgument>
+                                  </ui:FilterOperationArgument.Operand>
+                                </ui:FilterOperationArgument>
+                              </scg:List>
+                            </ui:FilterDataTable.Filters>
+                            <ui:FilterDataTable.SelectColumns>
+                              <scg:List x:TypeArguments="InArgument" Capacity="16">
+                                <InArgument x:TypeArguments="x:String">["Region"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Country"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Work Location"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Email Address"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Employee ID"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Legal First Name"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Legal Last Name"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Hire Date"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Worker Status"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Worker Type"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Effective Date of Sub- Type Change"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Previous Worker Sub Type"]</InArgument>
+                                <InArgument x:TypeArguments="x:String">["Current Worker Sub Type"]</InArgument>
+                              </scg:List>
+                            </ui:FilterDataTable.SelectColumns>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:FilterDataTable>
+                          <Assign DisplayName="Assign for Break in GCR" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_112">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Boolean">[IsBreak]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:ExcelReadRange AddHeaders="True" DataTable="[dt_CMOP]" DisplayName="Read Range for Current Month Sheet After pasting values from SGA" sap:VirtualizedContainerService.HintSize="334,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_29" Range="A2" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" />
+                        </Sequence>
+                        <ui:LogMessage DisplayName="Log Message 12" sap:VirtualizedContainerService.HintSize="2442,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;Filtered the previous month dates in Global conversion Report&quot;]" />
+                        <If sap2010:Annotation.AnnotationText="If PreviousMonth Employees not existing in Global Conversion Report then apply formulas in current month sheet or else flow will go to Global Report conversion flow and continue the process.&#xA;" Condition="[Dt_FilteredGCR is Nothing]" DisplayName="IfForPreviousMonthDataIsPresentInGCR" sap:VirtualizedContainerService.HintSize="2442,5567.33333333333" sap2010:WorkflowViewState.IdRef="If_25">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence sap2010:Annotation.AnnotationText=" If No Employees present in previous month in Global Conversion Report excel then we can directly apply formula's respectively.&#xA;" DisplayName="SequenceForCurrentMonthSheetFormulas" sap:VirtualizedContainerService.HintSize="882,3494" sap2010:WorkflowViewState.IdRef="Sequence_111">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:ExcelReadRange AddHeaders="True" DataTable="[dt_CMNoDataGCR]" DisplayName="Read Range for Current Month Sheet After Filter" sap:VirtualizedContainerService.HintSize="840,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_32" Range="A2" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" />
+                              <Assign DisplayName="Assign Current Month Row Count without headers" sap:VirtualizedContainerService.HintSize="840,62" sap2010:WorkflowViewState.IdRef="Assign_124">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Int32">[CMRowCountNoDataGCR]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Int32">[dt_CMNoDataGCR.Rows.Count]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <Assign DisplayName="Assign Current Month Row Count With Headers" sap:VirtualizedContainerService.HintSize="840,62" sap2010:WorkflowViewState.IdRef="Assign_125">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:Int32">[CMCountNoDataGCR]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:Int32">[CMRowCountNoDataGCR+2]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <ui:LogMessage DisplayName="Log Message 13" sap:VirtualizedContainerService.HintSize="840,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[&quot;We are applying formulas directly because no previous month employees exists in GCR Excel&quot;]" />
+                              <If sap2010:Annotation.AnnotationText="if  rowcount not equal to 0 it enters in to the if part" Condition="[CMRowCountNoDataGCR&lt;&gt;0]" DisplayName="IfOutputCurrentMonthSheet" sap:VirtualizedContainerService.HintSize="840,2964.66666666667" sap2010:WorkflowViewState.IdRef="If_20">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If.Then>
+                                  <Sequence DisplayName="SequenceforWhenOutputCurrentMonthContainsData" sap:VirtualizedContainerService.HintSize="418,2804" sap2010:WorkflowViewState.IdRef="Sequence_109">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence DisplayName="DoForImplimatingFormulas" sap:VirtualizedContainerService.HintSize="376,2712" sap2010:WorkflowViewState.IdRef="Sequence_108">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="" Cell="[&quot;C3:C&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Country (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_269" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!A:A)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="" Cell="[&quot;D3:D&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for  Time Type Worker Sub Type  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_270" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!J:J)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="" Cell="[&quot;E3:E&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for E-mail   (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_271" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!BM:BM)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="" Cell="[&quot;F3:F&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell Comp Grade   (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_272" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!AO:AO)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell Cell="[&quot;G3:G&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Job Code  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_273" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=(XLOOKUP($A3, GWD!$D:$D,GWD!W:W))" />
+                                      <ui:ExcelWriteCell Cell="[&quot;H3:H&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Job Profile  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_274" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!R:R)" />
+                                      <ui:ExcelWriteCell Cell="[&quot;I3:I&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Hire Date (if conversion in Romania, complete in column I)  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_275" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!F:F)" />
+                                      <ui:ExcelWriteCell Cell="[&quot;K3:K&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Start Vesting Date  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_276" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IFS(C3=&quot;+&quot;&quot;&quot;Romania&quot;&quot;&quot;+&quot;,I3,I3&gt;'Cut-off Dates'!A$22,'Cut-off Dates'!B$23,I3&gt;'Cut-off Dates'!A$21,'Cut-off Dates'!B$22,I3&gt;'Cut-off Dates'!A$20,'Cut-off Dates'!B$21,I3&gt;'Cut-off Dates'!A$19,'Cut-off Dates'!B$20,I3&gt;'Cut-off Dates'!A$18,'Cut-off Dates'!B$19)&quot;]" />
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;L3:L&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Value in Offer Letter  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_277" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP(A3, 'Stock Grant - Additions'!A:A,'Stock Grant - Additions'!Y:Y)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;N3:N&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Tier  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_278" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP(C3,Country!A:A,Country!B:B)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;O3:O&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Max Guidelines  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_279" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IFS(N3=&quot;&quot;Tier A&quot;&quot;,XLOOKUP(G3,'Guidelines by Role'!A:A,'Guidelines by Role'!G:G),N3=&quot;&quot;Tier B&quot;&quot;,XLOOKUP(G3,'Guidelines by Role'!A:A,'Guidelines by Role'!I:I))&quot;]">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;P3:P&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Over guidelines  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_280" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(Q3&gt;=101%,&quot;+&quot;&quot;&quot;Over&quot;&quot;&quot;+&quot;,&quot;&quot;&quot;&quot;)&quot;]">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell Cell="[&quot;Q3:Q&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for % of guideline max  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_281" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=L3/O3" />
+                                      <ui:ExcelWriteCell Cell="[&quot;R3:R&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for CC (also check for Level 09 &amp; 10)  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_282" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(F3=&quot;+&quot;&quot;&quot;Level 09&quot;&quot;&quot;+&quot;,&quot;+&quot;&quot;&quot;CC VERIFY&quot;&quot;&quot;+&quot;,IF(F3=&quot;+&quot;&quot;&quot;Level 10&quot;&quot;&quot;+&quot;,&quot;+&quot;&quot;&quot;CC VERIFY&quot;&quot;&quot;+&quot;,IF(Q3&gt;=250%,&quot;+&quot;&quot;&quot;CC VERIFY&quot;&quot;&quot;+&quot;,&quot;&quot;&quot;&quot;)))&quot;]" />
+                                      <ui:ExcelWriteCell Cell="[&quot;S3:S&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Price used for Determining # of Shares  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_283" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=Grant_Price" />
+                                      <ui:ExcelWriteCell Cell="[&quot;T3:T&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Value In Offer / Stock Value  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_284" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=IFERROR(ROUNDDOWN(L3/S3,0),0)" />
+                                      <ui:ExcelWriteCell Cell="[&quot;V3:V&quot;+CMCountNoDataGCR.ToString]" DisplayName="Write Cell for Net Amount Owned  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_285" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=T3-U3" />
+                                      <ui:ExcelWriteCell Cell="[&quot;W3:W&quot;+CMCountNoDataGCR.ToString]" DisplayName="Stock Options Final Grant Formula  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_286" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(C3=&quot;&quot;Romania&quot;&quot;,V3,0)&quot;]" />
+                                      <ui:ExcelWriteCell Cell="[&quot;X3:X&quot;+CMCountNoDataGCR.ToString]" DisplayName="RSU Final Grant Formula  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_287" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(C3=&quot;&quot;Romania&quot;&quot;,0,V3)&quot;]" />
+                                      <ui:ExcelWriteCell Cell="[&quot;Y3:Y&quot;+CMCountNoDataGCR.ToString]" DisplayName="Wite Range for Total Formula  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_288" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=W3+X3" />
+                                      <ui:ExcelWriteCell Cell="[&quot;AA3:AA&quot;+CMCountNoDataGCR.ToString]" DisplayName="Vesting schedule Name Formula  (No Data in GCR)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_289" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(C3=&quot;&quot;Romania&quot;&quot;,&quot;&quot;1/48 monthly, 1 year cliff&quot;&quot;, &quot;&quot;RSU 25% at 1y, quarterly thereafter&quot;&quot;)&quot;]" />
+                                    </Sequence>
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence DisplayName="Sequence when there is no data found (No Dta in GCR)" sap:VirtualizedContainerService.HintSize="376,186.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_110">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:LogMessage DisplayName="Log Message for no data in CurrentMonth Sheet (No data GCR)" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_24" Level="Info" Message="[&quot;No Data in current month sheet&quot;]" />
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence DisplayName="SequenceForCurrentMonthSheetFormulasAfterGCREmployeeIDComparision" sap:VirtualizedContainerService.HintSize="1514,5406.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_125">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence sap2010:Annotation.AnnotationText=" " DisplayName="SequenceForEmployeesExistsInGCRExcelForPreviousMonth" sap:VirtualizedContainerService.HintSize="1472,2175.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_120">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="sd:DataTable" Name="dt_CMAddedDataGCR" />
+                                </Sequence.Variables>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[Dt_FilteredGCR]" DisplayName="ForEachRowInDataTableForGCRExcel" sap:VirtualizedContainerService.HintSize="1430,1654" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+                                  <ui:ForEachRow.Body>
+                                    <ActivityAction x:TypeArguments="sd:DataRow">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                                      </ActivityAction.Argument>
+                                      <Sequence DisplayName="BodyForGCRExcel" sap:VirtualizedContainerService.HintSize="1396,1533.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_119">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[IndexOutDt1]" DataTable="[dt_CMOP]" DisplayName="ForEachRowInDataTableForCurrentMonthSheet" sap:VirtualizedContainerService.HintSize="1354,1441.33333333333" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+                                          <ui:ForEachRow.Body>
+                                            <ActivityAction x:TypeArguments="sd:DataRow">
+                                              <ActivityAction.Argument>
+                                                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="line" />
+                                              </ActivityAction.Argument>
+                                              <Sequence DisplayName="BodyForCurrentMonthSheet" sap:VirtualizedContainerService.HintSize="1320,1320.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_118">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <If Condition="[CurrentRow(&quot;Employee ID&quot;).ToString = line(&quot;Worker ID&quot;).ToString]" DisplayName="Compare Two datatable Data" sap:VirtualizedContainerService.HintSize="1278,1228.66666666667" sap2010:WorkflowViewState.IdRef="If_23">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <If.Then>
+                                                    <Sequence sap2010:Annotation.AnnotationText="f Previous month data present then Compare the Employee ID's with Current Month sheet Employee ID's.If any Employee ID matches then their conversion date should print in current month sheet respectively." DisplayName="IfMatchGlobalConversionSheetEmployeeIDDataAndCurrentMonthWorkerIDData" sap:VirtualizedContainerService.HintSize="706,807.333333333333" sap2010:WorkflowViewState.IdRef="Sequence_114">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <If Condition="[IsBreak = False]" DisplayName="IfForMatchingRecords " sap:VirtualizedContainerService.HintSize="664,715.333333333333" sap2010:WorkflowViewState.IdRef="If_21">
+                                                        <If.Then>
+                                                          <Sequence DisplayName="MatchedRecordsThenUpdateConversionDateInCurrentMonthSheetUsingLink" sap:VirtualizedContainerService.HintSize="376,554.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_112">
+                                                            <sap:WorkflowViewStateService.ViewState>
+                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                              </scg:Dictionary>
+                                                            </sap:WorkflowViewStateService.ViewState>
+                                                            <ui:InvokeCode ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="In this we are comparing matching Employee ID's from current month sheet and global conversion report if any employee Id matches then current type effective date from global conversion report should print as Conversion date in current month sheet with corresponding employee ID" Code="For Each dtRow As datarow In Dt_CM_OP.Rows&#xA;If Dt3.AsEnumerable.Where(Function(row) row(&quot;Employee ID&quot;).ToString.Trim.Equals(dtRow(&quot;Worker ID&quot;).ToString)).Count &gt; 0 Then&#xA;dtRow(&quot;Conversion Date&quot;) = Dt3.AsEnumerable.Where(Function(row) row(&quot;Employee ID&quot;).ToString.Trim.Equals(dtRow(&quot;Worker ID&quot;).tostring))(0)(&quot;Effective Date of Sub- Type Change&quot;).tostring&#xA;End If&#xA;Next dtRow" DisplayName="Invoke code for matching data in GCR sheet" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_5">
+                                                              <ui:InvokeCode.Arguments>
+                                                                <InArgument x:TypeArguments="sd:DataTable" x:Key="Dt3">[Dt_FilteredGCR]</InArgument>
+                                                                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="Dt_CM_OP">[dt_CMOP]</InOutArgument>
+                                                              </ui:InvokeCode.Arguments>
+                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                  <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                                                </scg:Dictionary>
+                                                              </sap:WorkflowViewStateService.ViewState>
+                                                            </ui:InvokeCode>
+                                                            <Assign DisplayName="Assign for Break" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_113">
+                                                              <Assign.To>
+                                                                <OutArgument x:TypeArguments="x:Boolean">[IsBreak]</OutArgument>
+                                                              </Assign.To>
+                                                              <Assign.Value>
+                                                                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                              </Assign.Value>
+                                                            </Assign>
+                                                            <ui:Break DisplayName="Break3" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Break_8" />
+                                                            <ui:LogMessage DisplayName="Log Message 14" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Info" Message="[&quot;If any Employee Id matches iin GCR Excel and Current Month sheet&quot;]" />
+                                                          </Sequence>
+                                                        </If.Then>
+                                                        <If.Else>
+                                                          <Sequence DisplayName="BreakForSecondRecordAndExitLoop" sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_113">
+                                                            <sap:WorkflowViewStateService.ViewState>
+                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                              </scg:Dictionary>
+                                                            </sap:WorkflowViewStateService.ViewState>
+                                                            <ui:Break DisplayName="Break1" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Break_9" />
+                                                          </Sequence>
+                                                        </If.Else>
+                                                      </If>
+                                                    </Sequence>
+                                                  </If.Then>
+                                                  <If.Else>
+                                                    <Sequence sap2010:Annotation.AnnotationText="If Employee ID's not matching then add the row in Current Month Sheet and paste the name of employee from Global conversion Report Excel then apply the formulas in Current Month sheet respectively.&#xA;6.If no data present in current month sheet then send notification to process owner" DisplayName="NotMatchDatatableData" sap:VirtualizedContainerService.HintSize="526,1068" sap2010:WorkflowViewState.IdRef="Sequence_117">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <If Condition="[IndexOutDt1=dt_CMOP.Rows.Count-1]" DisplayName="Count the Two tables data if not match add in to new row in current month sheet" sap:VirtualizedContainerService.HintSize="484,976" sap2010:WorkflowViewState.IdRef="If_22">
+                                                        <sap:WorkflowViewStateService.ViewState>
+                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                          </scg:Dictionary>
+                                                        </sap:WorkflowViewStateService.ViewState>
+                                                        <If.Then>
+                                                          <Sequence DisplayName="SequenceForAddingNewRecordsInCurrentMonthSheet" sap:VirtualizedContainerService.HintSize="376,784.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_115">
+                                                            <sap:WorkflowViewStateService.ViewState>
+                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                              </scg:Dictionary>
+                                                            </sap:WorkflowViewStateService.ViewState>
+                                                            <Assign DisplayName="Assign for Legal First Name" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_114">
+                                                              <Assign.To>
+                                                                <OutArgument x:TypeArguments="x:String">[LegalFirstName]</OutArgument>
+                                                              </Assign.To>
+                                                              <Assign.Value>
+                                                                <InArgument x:TypeArguments="x:String">[CurrentRow("Legal First Name").ToString]</InArgument>
+                                                              </Assign.Value>
+                                                            </Assign>
+                                                            <Assign DisplayName="Assign for legal Last Name" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_115">
+                                                              <Assign.To>
+                                                                <OutArgument x:TypeArguments="x:String">[LegalLastName]</OutArgument>
+                                                              </Assign.To>
+                                                              <Assign.Value>
+                                                                <InArgument x:TypeArguments="x:String">[CurrentRow("Legal Last Name").ToString]</InArgument>
+                                                              </Assign.Value>
+                                                            </Assign>
+                                                            <Assign DisplayName="Assign Legal Full Name" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_116">
+                                                              <Assign.To>
+                                                                <OutArgument x:TypeArguments="x:String">[LegalFullName]</OutArgument>
+                                                              </Assign.To>
+                                                              <Assign.Value>
+                                                                <InArgument x:TypeArguments="x:String">[LegalFirstName+" "+LegalLastName]</InArgument>
+                                                              </Assign.Value>
+                                                            </Assign>
+                                                            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{CurrentRow(&quot;Employee ID&quot;).ToString,LegalFullName,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;, CurrentRow(&quot;Effective Date of Sub- Type Change&quot;).ToString}]" DataTable="[dt_CMOP]" DisplayName="Add Data Row In Current Month Sheet" sap:VirtualizedContainerService.HintSize="334,190" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                                                            <ui:Break DisplayName="Break2" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Break_10" />
+                                                            <ui:LogMessage DisplayName="Log Message 15" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;Added rows in current month sheet for unmatched employee Id's &quot;]" />
+                                                          </Sequence>
+                                                        </If.Then>
+                                                      </If>
+                                                    </Sequence>
+                                                  </If.Else>
+                                                </If>
+                                              </Sequence>
+                                            </ActivityAction>
+                                          </ui:ForEachRow.Body>
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                        </ui:ForEachRow>
+                                      </Sequence>
+                                    </ActivityAction>
+                                  </ui:ForEachRow.Body>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:ForEachRow>
+                                <ui:ExcelWriteRange AddHeaders="False" sap2010:Annotation.AnnotationText="Write Range for Current Month Sheet from stock grant addition sheet(Previous Month Effective date Employees)" DataTable="[dt_CMOP]" DisplayName="Write Range for Current Month Sheet After Comparing With GCR Data" sap:VirtualizedContainerService.HintSize="1430,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_29" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" StartingCell="A3">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:ExcelWriteRange>
+                                <ui:ExcelReadRange AddHeaders="True" sap2010:Annotation.AnnotationText="Read Range for Current Month Sheet After entering employee id and employee names from stock grant addition sheet (Previous Month Effective date employees)" DataTable="[dt_CMAddedDataGCR]" DisplayName="Read Range for Current Month Sheet" sap:VirtualizedContainerService.HintSize="1430,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_30" Range="A2" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:ExcelReadRange>
+                                <Assign sap2010:Annotation.AnnotationText="Assign count for current month rows for Current Month Sheet" DisplayName="Assign count for current month rows" sap:VirtualizedContainerService.HintSize="1430,62" sap2010:WorkflowViewState.IdRef="Assign_117">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[CMRowCountForDataGCR]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">[dt_CMAddedDataGCR.Rows.Count]</InArgument>
+                                  </Assign.Value>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </Assign>
+                                <Assign sap2010:Annotation.AnnotationText="Assign count with headers for Current Month Sheet" DisplayName="Assign count with headers" sap:VirtualizedContainerService.HintSize="1430,62" sap2010:WorkflowViewState.IdRef="Assign_118">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Int32">[CMCountForDataGCR]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Int32">[CMRowCountForDataGCR+2]</InArgument>
+                                  </Assign.Value>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </Assign>
+                              </Sequence>
+                              <If sap2010:Annotation.AnnotationText="if  rowcount not equal to 0 it enters in to the if part" Condition="[CMRowCountForDataGCR&lt;&gt;0]" DisplayName="If Output - Current Month sheet After Added Data From GCR" sap:VirtualizedContainerService.HintSize="1472,3099.33333333333" sap2010:WorkflowViewState.IdRef="If_24">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If.Then>
+                                  <Sequence DisplayName="SequenceWhenOutputCurrentMonthcontainsDataAfterGCRProcess" sap:VirtualizedContainerService.HintSize="418,2938.66666666667" sap2010:WorkflowViewState.IdRef="Sequence_123">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence DisplayName="DoForFormulasInCurrentMonthSheet" sap:VirtualizedContainerService.HintSize="376,2712" sap2010:WorkflowViewState.IdRef="Sequence_122">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;C3:C&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Country" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_290" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!A:A)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;D3:D&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for  Time Type Worker Sub Type" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_291" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!J:J)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText=" fill the data in to the cell" Cell="[&quot;E3:E&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for E-mail " sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_292" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!BM:BM)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;F3:F&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell Comp Grade " sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_293" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!AO:AO)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell Cell="[&quot;G3:G&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Job Code" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_294" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=(XLOOKUP($A3, GWD!$D:$D,GWD!W:W))" />
+                                      <ui:ExcelWriteCell Cell="[&quot;H3:H&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Job Profile" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_295" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!R:R)" />
+                                      <ui:ExcelWriteCell Cell="[&quot;I3:I&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Hire Date (if conversion in Romania, complete in column I)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_296" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP($A3, GWD!$D:$D,GWD!F:F)" />
+                                      <ui:ExcelWriteCell Cell="[&quot;K3:K&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Start Vesting Date" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_297" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IFS(C3=&quot;+&quot;&quot;&quot;Romania&quot;&quot;&quot;+&quot;,I3,I3&gt;'Cut-off Dates'!A$22,'Cut-off Dates'!B$23,I3&gt;'Cut-off Dates'!A$21,'Cut-off Dates'!B$22,I3&gt;'Cut-off Dates'!A$20,'Cut-off Dates'!B$21,I3&gt;'Cut-off Dates'!A$19,'Cut-off Dates'!B$20,I3&gt;'Cut-off Dates'!A$18,'Cut-off Dates'!B$19)&quot;]" />
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;L3:L&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Value in Offer Letter" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_299" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP(A3, 'Stock Grant - Additions'!A:A,'Stock Grant - Additions'!Y:Y)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;N3:N&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Tier" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_300" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=XLOOKUP(C3,Country!A:A,Country!B:B)">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;O3:O&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Max Guidelines" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_301" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IFS(N3=&quot;+&quot;&quot;&quot;Tier A&quot;&quot;&quot;+&quot;,XLOOKUP(G3,'Guidelines by Role'!A:A,'Guidelines by Role'!F:F),N3=&quot;+&quot;&quot;&quot;Tier B&quot;&quot;&quot;+&quot;,XLOOKUP(G3,'Guidelines by Role'!A:A,'Guidelines by Role'!G:G))&quot;]">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell Cell="[&quot;Q3:Q&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for % of guideline max" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_303" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=L3/O3" />
+                                      <ui:ExcelWriteCell sap2010:Annotation.AnnotationText="fill the data in to the cell" Cell="[&quot;P3:P&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Over guidelines" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_302" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(Q3&gt;=101%,&quot;+&quot;&quot;&quot;Over&quot;&quot;&quot;+&quot;,&quot;&quot;&quot;&quot;)&quot;]">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:ExcelWriteCell>
+                                      <ui:ExcelWriteCell Cell="[&quot;R3:R&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for CC (also check for Level 09 &amp; 10)" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_304" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(F3=&quot;+&quot;&quot;&quot;Level 09&quot;&quot;&quot;+&quot;,&quot;+&quot;&quot;&quot;CC VERIFY&quot;&quot;&quot;+&quot;,IF(F3=&quot;+&quot;&quot;&quot;Level 10&quot;&quot;&quot;+&quot;,&quot;+&quot;&quot;&quot;CC VERIFY&quot;&quot;&quot;+&quot;,IF(Q3&gt;=250%,&quot;+&quot;&quot;&quot;CC VERIFY&quot;&quot;&quot;+&quot;,&quot;&quot;&quot;&quot;)))&quot;]" />
+                                      <ui:ExcelWriteCell Cell="[&quot;S3:S&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Price used for Determining # of Shares" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_305" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=Grant_Price" />
+                                      <ui:ExcelWriteCell Cell="[&quot;T3:T&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Value In Offer / Stock Value" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_306" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=IFERROR(ROUNDDOWN(L3/S3,0),0)" />
+                                      <ui:ExcelWriteCell Cell="[&quot;V3:V&quot;+CMCountForDataGCR.ToString]" DisplayName="Write Cell for Net Amount Owned" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_307" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=T3-U3" />
+                                      <ui:ExcelWriteCell Cell="[&quot;W3:W&quot;+CMCountForDataGCR.ToString]" DisplayName="Stock Options Final Grant Formula" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_308" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(C3=&quot;&quot;Romania&quot;&quot;,V3,0)&quot;]" />
+                                      <ui:ExcelWriteCell Cell="[&quot;X3:X&quot;+CMCountForDataGCR.ToString]" DisplayName="RSU Final Grant Formula" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_309" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(C3=&quot;&quot;Romania&quot;&quot;,0,V3)&quot;]" />
+                                      <ui:ExcelWriteCell Cell="[&quot;Y3:Y&quot;+CMCountForDataGCR.ToString]" DisplayName="Total Formula" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_310" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="=W3+X3" />
+                                      <ui:ExcelWriteCell Cell="[&quot;AA3:AA&quot;+CMCountForDataGCR.ToString]" DisplayName="Vesting schedule Name Formula" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_311" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" Text="[&quot;=IF(C3=&quot;&quot;Romania&quot;&quot;,&quot;&quot;1/48 monthly, 1 year cliff&quot;&quot;, &quot;&quot;RSU 25% at 1y, quarterly thereafter&quot;&quot;)&quot;]" />
+                                    </Sequence>
+                                    <ui:LogMessage DisplayName="Log Message 16" sap:VirtualizedContainerService.HintSize="376,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;Applied Formulas after comparing data and entered valid data in current month sheet&quot;]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence DisplayName="Sequence when there is no data found" sap:VirtualizedContainerService.HintSize="376,186.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_124">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:LogMessage DisplayName="Log Message for no data in CurrentMonth Sheet " sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_25" Level="Info" Message="[&quot;No Data in current month sheet&quot;]" />
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                        <ui:ExcelReadRange AddHeaders="True" DataTable="[dt_FinalCurrentMonth]" DisplayName="Read Range for current month sheet after applying formulas" sap:VirtualizedContainerService.HintSize="2442,58.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelReadRange_31" Range="A2" SheetName="[in_Config(&quot;CM_Sheet&quot;).ToString]" />
+                        <Sequence sap2010:Annotation.AnnotationText="1. Here we are checking that country name in current month sheet is equals to &quot;Romania&quot; then we have to print respective Employee ID's in OptionTable Sheet and apply given formulas.&#xA;2. If Country name not equals to &quot;Romania then Employee ID's  should print in RSU Table and apply given formulas&#xA;" DisplayName="SequenceForOptionTableAndRSUTableSheet" sap:VirtualizedContainerService.HintSize="2442,3892" sap2010:WorkflowViewState.IdRef="Sequence_126">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:Int32" Name="Int_CountRSU" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:ExcelDeleteRange DisplayName="Delete Range for Option Table sheet" sap:VirtualizedContainerService.HintSize="334,135.333333333333" sap2010:WorkflowViewState.IdRef="ExcelDeleteRange_20" Range="B4:XFD1048576" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" ShiftCells="False" ShiftOption="ShiftUp" />
+                          <ui:ExcelDeleteRange DisplayName="Delete Range for RSU Table sheet" sap:VirtualizedContainerService.HintSize="334,135.333333333333" sap2010:WorkflowViewState.IdRef="ExcelDeleteRange_21" Range="B4:XFD1048576" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" ShiftCells="False" ShiftOption="ShiftUp" />
+                          <ui:FilterDataTable sap2010:Annotation.AnnotationText="By using filter data table we are filtering the data which contains Romania as country and Extracting Employee ID from current month sheet " DataTable="[dt_FinalCurrentMonth]" DisplayName="Filter Data Table for option table sheet" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_26" OutputDataTable="[Dt_Romania]" SelectColumnsMode="Keep">
+                            <ui:FilterDataTable.Filters>
+                              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                                  <ui:FilterOperationArgument.Column>
+                                    <InArgument x:TypeArguments="x:String">["Country"]</InArgument>
+                                  </ui:FilterOperationArgument.Column>
+                                  <ui:FilterOperationArgument.Operand>
+                                    <InArgument x:TypeArguments="x:String">["Romania"]</InArgument>
+                                  </ui:FilterOperationArgument.Operand>
+                                </ui:FilterOperationArgument>
+                              </scg:List>
+                            </ui:FilterDataTable.Filters>
+                            <ui:FilterDataTable.SelectColumns>
+                              <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                <InArgument x:TypeArguments="x:String">["Worker ID"]</InArgument>
+                              </scg:List>
+                            </ui:FilterDataTable.SelectColumns>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:FilterDataTable>
+                          <ui:ExcelWriteRange AddHeaders="False" sap2010:Annotation.AnnotationText="The filtered data from filter data table will print in Option Table sheet from B4 range" DataTable="[Dt_Romania]" DisplayName="Write Range for Option Table sheet" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_30" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" StartingCell="B4">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:ExcelWriteRange>
+                          <Assign DisplayName="Assign for RowCount In OptionTable Sheet" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_119">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[RowCountOT]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[Dt_Romania.Rows.Count]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign DisplayName="Assign for RowsCount In OptionTable With Headers" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_120">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[CountOT]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[RowCountOT+3]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:ExcelWriteCell Cell="[&quot;C4:C&quot;+CountOT.ToString]" DisplayName="Write Cell for Name of Optionee in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_312" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!B:B)" />
+                          <ui:ExcelWriteCell Cell="[&quot;D4:D&quot;+CountOT.ToString]" DisplayName="Write Cell for Country of Residence  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_313" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!C:C)" />
+                          <ui:ExcelWriteCell Cell="[&quot;E4:E&quot;+CountOT.ToString]" DisplayName="Write Cell for Type of Option  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_314" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="NSO" />
+                          <ui:ExcelWriteCell Cell="[&quot;F4:F&quot;+CountOT.ToString]" DisplayName="Write Cell for Vesting Commencement Date  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_315" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!K:K)" />
+                          <ui:ExcelWriteCell Cell="[&quot;G4:G&quot;+CountOT.ToString]" DisplayName="Write Cell for Number of Shares  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_316" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!W:W)" />
+                          <ui:ExcelWriteCell Cell="[&quot;K4:K&quot;+CountOT.ToString]" DisplayName="Write Cell for Grant Reason  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_320" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!Z:Z)" />
+                          <ui:ExcelWriteCell Cell="[&quot;H4:H&quot;+CountOT.ToString]" DisplayName="Write Cell for Vesting Schedule (Notes)  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_317" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="=1" />
+                          <ui:ExcelWriteCell Cell="[&quot;I4:I&quot;+CountOT.ToString]" DisplayName="Write Cell for Vesting Schedule Name  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_318" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!AA:AA)" />
+                          <ui:ExcelWriteCell Cell="[&quot;J4:J&quot;+CountOT.ToString]" DisplayName="Write Cell for Exercise Price  in OptionTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_319" SheetName="[in_Config(&quot;OptionTable_Sheet&quot;).ToString]" Text="[&quot;=IF(D4=&quot;&quot;Romania&quot;&quot;,&quot;&quot;0.10&quot;&quot;,&quot;&quot;5.06&quot;&quot;)&quot;]" />
+                          <ui:LogMessage DisplayName="Log Message17" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_22" Level="Info" Message="[&quot;Entered Employee Id's whose country is Romania from current month sheet and paste enter employee id in option table and applied required formulas in OptionTable&quot;]" />
+                          <ui:FilterDataTable sap2010:Annotation.AnnotationText="In this filter data table we are filtering the Country which is not belongs to Romania  and extracting he Employee ID from Current Month Sheet" DataTable="[dt_FinalCurrentMonth]" DisplayName="Filter Data Table for RSU Table sheet" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="334,162.666666666667" sap2010:WorkflowViewState.IdRef="FilterDataTable_27" OutputDataTable="[Dt_NonRomania]" SelectColumnsMode="Keep">
+                            <ui:FilterDataTable.Filters>
+                              <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+                                <ui:FilterOperationArgument BooleanOperator="And" Operator="NOTCONTAINS">
+                                  <ui:FilterOperationArgument.Column>
+                                    <InArgument x:TypeArguments="x:String">["Country"]</InArgument>
+                                  </ui:FilterOperationArgument.Column>
+                                  <ui:FilterOperationArgument.Operand>
+                                    <InArgument x:TypeArguments="x:String">["Romania"]</InArgument>
+                                  </ui:FilterOperationArgument.Operand>
+                                </ui:FilterOperationArgument>
+                              </scg:List>
+                            </ui:FilterDataTable.Filters>
+                            <ui:FilterDataTable.SelectColumns>
+                              <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                <InArgument x:TypeArguments="x:String">["Worker ID"]</InArgument>
+                              </scg:List>
+                            </ui:FilterDataTable.SelectColumns>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:FilterDataTable>
+                          <ui:ExcelWriteRange AddHeaders="False" sap2010:Annotation.AnnotationText="Filtered data i.e, Employee ID's will print from B4 Range in RSU Table sheet&#xA;" DataTable="[Dt_NonRomania]" DisplayName="Write Range for RSU Table" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_31" SheetName="RSU Table" StartingCell="B4">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:ExcelWriteRange>
+                          <Assign DisplayName="Assign for RSU Table row count" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_121">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[RowCountRSU]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[Dt_NonRomania.Rows.Count]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign DisplayName="Assign for RSU Table row count with headers" sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_122">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:Int32">[Int_CountRSU]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:Int32">[RowCountRSU+3]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:ExcelWriteCell Cell="[&quot;C4:C&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for Name of Grantee Write Cell for Country in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_321" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!B:B)" />
+                          <ui:ExcelWriteCell Cell="[&quot;D4:D&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for Country in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_322" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!C:C)" />
+                          <ui:ExcelWriteCell Cell="[&quot;E4:E&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for Type of Grant  in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_323" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="RSU" />
+                          <ui:ExcelWriteCell Cell="[&quot;F4:F&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for Vesting Commencement Date  in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_324" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!K:K)" />
+                          <ui:ExcelWriteCell Cell="[&quot;G4:G&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for No of Shares  in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_325" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!X:X)" />
+                          <ui:ExcelWriteCell Cell="[&quot;H4:H&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for Vesting Schedule (Notes)  in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_326" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="=1" />
+                          <ui:ExcelWriteCell Cell="[&quot;I4:I&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for Vesting Schedule in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_327" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!AA:AA)" />
+                          <ui:ExcelWriteCell Cell="[&quot;J4:J&quot;+Int_CountRSU.ToString]" DisplayName="Write Cell for Grant Reason  in RSUTable" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="ExcelWriteCell_328" SheetName="[in_Config(&quot;RSU_Sheet&quot;).ToString]" Text="=XLOOKUP($B4,'Current Month'!$A:$A,'Current Month'!Z:Z)" />
+                          <ui:LogMessage DisplayName="Log Message 18" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_23" Level="Info" Message="[&quot;Entered Employee Id's whose country is not equal Romania  from current month sheet and paste enter employee id in RSUtable and applied required formulas in RSUTable&quot;]" />
+                        </Sequence>
+                      </Sequence>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,176.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_129">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,84.6666666666667" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[&quot;send notification to process owner that average trading path and yahoo finance values are not matching&quot;]" />
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </Sequence>
+            </Sequence>
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ExcelApplicationScope>
+  </Sequence>
+</Activity>
